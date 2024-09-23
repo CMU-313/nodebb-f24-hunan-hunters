@@ -49,6 +49,7 @@ module.exports = function (User) {
 			joindate: timestamp,
 			lastonline: timestamp,
 			status: 'online',
+			badges: []
 		};
 		['picture', 'fullname', 'location', 'birthday'].forEach((field) => {
 			if (data[field]) {
@@ -87,6 +88,7 @@ module.exports = function (User) {
 			['users:online', timestamp, userData.uid],
 			['users:postcount', 0, userData.uid],
 			['users:reputation', 0, userData.uid],
+			['users:badges', userData.uid, JSON.stringify(userData.badges)]
 		];
 
 		if (userData.fullname) {
