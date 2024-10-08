@@ -408,4 +408,13 @@ module.exports = function (Posts) {
 			cache.del('post-queue');
 		}
 	};
+
+	Posts.isFlagged = async function (uid, cid) {
+		const isModerator = await user.isModerator(uid, cid);
+		const isGlobalModerator = await user.isGlobalModerator(uid);
+		const isAdministrator = await user.isAdministrator(uid);
+
+
+		post.data.isFlagged = isModerator || isGlobalModerator || isAdministrator;
+	}
 };
