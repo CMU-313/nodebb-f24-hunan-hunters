@@ -26,7 +26,7 @@ module.exports = function (User) {
 		'aboutme', 'signature', 'uploadedpicture', 'profileviews', 'reputation',
 		'postcount', 'topiccount', 'lastposttime', 'banned', 'banned:expire',
 		'status', 'flags', 'followerCount', 'followingCount', 'cover:url',
-		'cover:position', 'groupTitle', 'mutedUntil', 'mutedReason',
+		'cover:position', 'groupTitle', 'mutedUntil', 'mutedReason', 'isInstructor'
 	];
 
 	User.guestData = {
@@ -372,7 +372,6 @@ module.exports = function (User) {
 	User.isInstructor = async function (uid) {
 		const isGlobalModerator = await user.isGlobalModerator(uid);
 		const isAdministrator = await user.isAdministrator(uid);
-	
 	
 		return isGlobalModerator || isAdministrator
 	}
