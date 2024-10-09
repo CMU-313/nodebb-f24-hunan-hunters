@@ -81,6 +81,7 @@ module.exports = function (Posts) {
 			postData.topic = await topics.getTopicFields(postData.data.tid, ['title', 'cid', 'lastposttime']);
 		}
 		postData.category = await categories.getCategoryData(postData.topic.cid);
+
 		const result = await plugins.hooks.fire('filter:parse.post', { postData: postData.data });
 		postData.data.content = result.postData.content;
 	}
@@ -408,13 +409,4 @@ module.exports = function (Posts) {
 			cache.del('post-queue');
 		}
 	};
-
-	Posts.isFlagged = async function (uid, cid) {
-		const isModerator = await user.isModerator(uid, cid);
-		const isGlobalModerator = await user.isGlobalModerator(uid);
-		const isAdministrator = await user.isAdministrator(uid);
-
-
-		post.data.isFlagged = isModerator || isGlobalModerator || isAdministrator;
-	}
 };

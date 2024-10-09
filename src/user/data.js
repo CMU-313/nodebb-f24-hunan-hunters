@@ -8,6 +8,7 @@ const db = require('../database');
 const meta = require('../meta');
 const plugins = require('../plugins');
 const utils = require('../utils');
+const user = require('../user');
 
 const relative_path = nconf.get('relative_path');
 
@@ -15,7 +16,7 @@ const intFields = [
 	'uid', 'postcount', 'topiccount', 'reputation', 'profileviews',
 	'banned', 'banned:expire', 'email:confirmed', 'joindate', 'lastonline',
 	'lastqueuetime', 'lastposttime', 'followingCount', 'followerCount',
-	'blocksCount', 'passwordExpiry', 'mutedUntil',
+	'blocksCount', 'passwordExpiry', 'mutedUntil'
 ];
 
 module.exports = function (User) {
@@ -366,5 +367,13 @@ module.exports = function (User) {
 		const newValue = await db.incrObjectFieldBy(`user:${uid}`, field, value);
 		plugins.hooks.fire('action:user.set', { uid: uid, field: field, value: newValue, type: type });
 		return newValue;
+	}
+
+	User.isInstructor = async function (uid) {
+		const isGlobalModerator = await user.isGlobalModerator(uid);
+		const isAdministrator = await user.isAdministrator(uid);
+	
+	
+		return isGlobalModerator || isAdministrator
 	}
 };
