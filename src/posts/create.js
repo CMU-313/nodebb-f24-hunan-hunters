@@ -18,7 +18,7 @@ module.exports = function (Posts) {
 		const { tid } = data;
 		const content = data.content.toString();
 		const timestamp = data.timestamp || Date.now();
-        const isPinned = data.isPinned || false;
+		const isPinned = data.isPinned || false;
 		const isMain = data.isMain || false;
 
 		if (!uid && parseInt(uid, 10) !== 0) {
