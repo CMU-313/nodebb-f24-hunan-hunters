@@ -368,11 +368,4 @@ module.exports = function (User) {
 		plugins.hooks.fire('action:user.set', { uid: uid, field: field, value: newValue, type: type });
 		return newValue;
 	}
-
-	User.isInstructor = async function (uid) {
-		const isGlobalModerator = await user.isGlobalModerator(uid);
-		const isAdministrator = await user.isAdministrator(uid);
-
-		return isGlobalModerator || isAdministrator;
-	};
 };
