@@ -222,6 +222,10 @@ describe('User', () => {
 		});
 	});
 
+	describe('.isInstructor()', () => {
+		
+	});
+
 	describe('.getModeratorUids()', () => {
 		before((done) => {
 			groups.join('cid:1:privileges:moderate', 1, done);
