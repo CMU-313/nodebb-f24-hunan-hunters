@@ -223,7 +223,25 @@ describe('User', () => {
 	});
 
 	describe('.isInstructor()', () => {
-		
+		it('should return false', (done) => {
+			User.isInstructor(testUid, (err, isInsructor) => {
+				assert.equal(err, null);
+				assert.equal(isInsructor, false);
+				done();
+			});
+		});
+
+		it('should return true after a user becomes an admin', (done) => {
+			addUserToGroup(testUid, 'administrators', (err) => {
+				assert.equal(err, null);
+
+				User.isInstructor(testUid, (err, isInstructor) => {
+					assert.ifError(err);
+					assert.equal(isInstructor, true);
+					done();
+				});
+			});
+		});
 	});
 
 	describe('.getModeratorUids()', () => {
