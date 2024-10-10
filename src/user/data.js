@@ -16,7 +16,7 @@ const intFields = [
 	'uid', 'postcount', 'topiccount', 'reputation', 'profileviews',
 	'banned', 'banned:expire', 'email:confirmed', 'joindate', 'lastonline',
 	'lastqueuetime', 'lastposttime', 'followingCount', 'followerCount',
-	'blocksCount', 'passwordExpiry', 'mutedUntil'
+	'blocksCount', 'passwordExpiry', 'mutedUntil',
 ];
 
 module.exports = function (User) {
@@ -26,7 +26,7 @@ module.exports = function (User) {
 		'aboutme', 'signature', 'uploadedpicture', 'profileviews', 'reputation',
 		'postcount', 'topiccount', 'lastposttime', 'banned', 'banned:expire',
 		'status', 'flags', 'followerCount', 'followingCount', 'cover:url',
-		'cover:position', 'groupTitle', 'mutedUntil', 'mutedReason', 'isInstructor'
+		'cover:position', 'groupTitle', 'mutedUntil', 'mutedReason', 'isInstructor',
 	];
 
 	User.guestData = {
@@ -372,7 +372,7 @@ module.exports = function (User) {
 	User.isInstructor = async function (uid) {
 		const isGlobalModerator = await user.isGlobalModerator(uid);
 		const isAdministrator = await user.isAdministrator(uid);
-	
-		return isGlobalModerator || isAdministrator
-	}
+
+		return isGlobalModerator || isAdministrator;
+	};
 };

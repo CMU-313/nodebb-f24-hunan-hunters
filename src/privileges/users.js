@@ -12,10 +12,10 @@ const helpers = require('./helpers');
 const privsUsers = module.exports;
 
 privsUsers.isInstructor = async function (uid) {
-	isAdmin = await isGroupMember(uid, 'administrators');
-	isGlobalMod = await isGroupMember(uid, 'Global Moderators');
+	const isAdmin = await isGroupMember(uid, 'administrators');
+	const isGlobalMod = await isGroupMember(uid, 'Global Moderators');
 
-	return isAdmin || isGlobalMod
+	return isAdmin || isGlobalMod;
 };
 
 privsUsers.isAdministrator = async function (uid) {
