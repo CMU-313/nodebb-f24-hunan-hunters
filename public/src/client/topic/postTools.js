@@ -29,6 +29,16 @@ define('forum/topic/postTools', [
 		votes.addVoteHandler();
 
 		PostTools.updatePostCount(ajaxify.data.postcount);
+
+		// added event listener for pin/unpin buttons for frontend
+		document.addEventListener('click', async (event) => {
+			const target = event.target;
+			if (target.matches('.pin-button')) {
+				const pid = target.dataset.pid;
+				const currentlyPinned = await PostTools.isPinned(pid);
+				await PostTools.togglePinStatus(pid, !currentlyPinned);
+			}
+		});
 	};
 
 	function renderMenu() {
@@ -96,6 +106,44 @@ define('forum/topic/postTools', [
 		postCountEl.attr('title', postCount)
 			.html(helpers.humanReadableNumber(postCount));
 		navigator.setCount(postCount);
+	};
+
+	// calling api endpoint to toggle pin status
+	PostTools.togglePinStatus = async function (pid, shouldPin) {
+		const endpoint = shouldPin ? `/api/posts/${pid}/pin` : `/api/posts/${pid}/unpin`;
+
+		try {
+			const response = await api.post(endpoint);
+			console.log(response.message);
+			PostTools.refreshPost(pid, response.post); //update UI for new pinned status
+		} catch (error) {
+			console.error('Error toggling pin status:', error.error || error.message);
+		}
+	};
+
+
+	// check if post is pinned
+	PostTools.isPinned = async function (pid) {
+		try {
+			const response = await api.get(`/api/posts/${pid}/isPinned`);
+			return response.pinned;
+		} catch (error) {
+			console.error('Error checking pinned status:', error.error || error.message);
+			return false;
+		}
+	};
+
+	PostTools.refreshPost = function (pid, updatedPost) {
+		const postElement = document.getElementById(`post-${pid}`);
+		if (postElement) {
+			const pinIcon = postElement.querySelector('.pin-icon');
+			if (pinIcon) {
+				pinIcon.classList.toggle('pinned', updatedPost.pinned);
+			}
+			if (updatedPost.pinned) {
+				postElement.parentNode.prepend(postElement);
+			}
+		}
 	};
 
 	function addPostHandlers(tid) {
