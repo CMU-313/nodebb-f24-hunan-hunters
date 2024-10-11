@@ -231,16 +231,20 @@ describe('User', () => {
 			});
 		});
 
-		it('should return true after a user becomes an admin', (done) => {
-			addUserToGroup(testUid, 'administrators', (err) => {
-				assert.equal(err, null);
+		before((done) => {
+			groups.join('administrators', 1, done);
+		});
 
-				User.isInstructor(testUid, (err, isInstructor) => {
-					assert.ifError(err);
-					assert.equal(isInstructor, true);
-					done();
-				});
+		it('should return true after a user becomes an admin', (done) => {
+			User.isInstructor(testUid, (err, isInstructor) => {
+				assert.ifError(err);
+				assert.equal(isInstructor, true);
+				done();
 			});
+		});
+
+		after((done) => {
+			groups.leave('administrators', 1, done);
 		});
 	});
 
