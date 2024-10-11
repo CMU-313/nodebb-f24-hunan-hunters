@@ -5,3 +5,8 @@ To test the flagging instructor posts feature, run nodebb with the frontend chan
 
 We also created tests for the isInstructor function (which checks if a user is an instructor) in tests/user.js.
 
+User Story #14:
+As a user, I would like to be able to pin posts so that I can focus on certain posts that I am interested in.
+
+This feature is not fully developed. We are struggling to join the front_end feature with the backend methods and implementation for toggling the pinned field within the post object. Our front end feature is fully developed and visible through 
+
