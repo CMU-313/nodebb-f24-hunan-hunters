@@ -115,7 +115,7 @@ define('forum/topic/postTools', [
 		try {
 			const response = await api.post(endpoint);
 			console.log(response.message);
-			PostTools.refreshPost(pid, response.post); //update UI for new pinned status
+			PostTools.refreshPost(pid, response.post); // update UI for new pinned status
 		} catch (error) {
 			console.error('Error toggling pin status:', error.error || error.message);
 		}
