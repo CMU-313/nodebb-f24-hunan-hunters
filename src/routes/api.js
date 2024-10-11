@@ -1,7 +1,7 @@
 'use strict';
 
 const express = require('express');
-
+const Posts = require('../posts');
 const uploadsController = require('../controllers/uploads');
 const helpers = require('./helpers');
 
@@ -22,6 +22,39 @@ module.exports = function (app, middleware, controllers) {
 	router.get('/unread/total', [...middlewares, middleware.ensureLoggedIn], helpers.tryRoute(controllers.unread.unreadTotal));
 	router.get('/topic/teaser/:topic_id', [...middlewares], helpers.tryRoute(controllers.topics.teaser));
 	router.get('/topic/pagination/:topic_id', [...middlewares], helpers.tryRoute(controllers.topics.pagination));
+
+	router.post('/:pid/pin', async (req, res) => {
+		const { pid } = req.params;
+
+		try {
+			const post = await Posts.tools.pin(pid);
+			res.json({ message: 'Post pinned successfully', post });
+		} catch (err) {
+			res.status(400).json({ error: err.message });
+		}
+	});
+
+	router.post('/:pid/unpin', async (req, res) => {
+		const { pid } = req.params;
+
+		try {
+			const post = await Posts.tools.unpin(pid);
+			res.json({ message: 'Post unpinned successfully', post });
+		} catch (err) {
+			res.status(400).json({ error: err.message });
+		}
+	});
+
+	router.get('/:pid/isPinned', async (req, res) => {
+		const { pid } = req.params;
+
+		try {
+			const pinned = await Posts.tools.isPinned(pid);
+			res.json({ pinned });
+		} catch (err) {
+			res.status(400).json({ error: err.message });
+		}
+	});
 
 	const multipart = require('connect-multiparty');
 	const multipartMiddleware = multipart();
