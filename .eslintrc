@@ -1,6 +1,6 @@
 {
 	"extends": [
-		"nodebb",
-		"prettier"
+		"nodebb"
+		//"prettier"
 	]
 }
