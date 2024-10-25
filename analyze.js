@@ -1,7 +1,11 @@
+'use strict';
+
 const Iroh = require('iroh');
 const fs = require('fs');
+const vm = require('vm');
+const path = require('path');
 
-console.log("Iroh is starting the analysis...");
+console.log('Iroh is starting the analysis...');
 
 const code = fs.readFileSync('app.js', 'utf-8');
 
@@ -9,10 +13,28 @@ const stage = new Iroh.Stage(code);
 
 const listener = stage.addListener(Iroh.FUNCTION);
 listener.on('enter', (e) => {
-  console.log(`Entering function: ${e.name}`);
+	console.log(`Entering function: ${e.name}`);
 });
 listener.on('return', (e) => {
-  console.log(`Returning from function: ${e.name}`);
+	console.log(`Returning from function: ${e.name}`);
 });
 
-eval(stage.script);
+
+const script = new vm.Script(stage.script);
+
+const currentDir = __dirname;
+
+const context = vm.createContext({
+	Iroh,
+	require,
+	console,
+	process,
+	global,
+	__dirname: currentDir,
+	__filename: path.join(currentDir, 'app.js'),
+});
+
+script.runInContext(context);
+
+
+console.log('Iroh has finished the analysis.');

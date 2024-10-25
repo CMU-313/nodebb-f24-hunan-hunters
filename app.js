@@ -1,7 +1,6 @@
-// Wrapped main logic in a function
-function main() {
-	'use strict';
+'use strict';
 
+function main() {
 	require('./require-main');
 
 	const nconf = require('nconf');
@@ -59,5 +58,4 @@ function main() {
 	}
 }
 
-// Execute the main function
 main();
