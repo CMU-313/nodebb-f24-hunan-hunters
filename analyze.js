@@ -1,9 +1,12 @@
 'use strict';
 
-const Iroh = require('iroh');
+// const Iroh = require('iroh');
+// const Iroh = require('./node_modules/iroh');
 const fs = require('fs');
-const vm = require('vm');
 const path = require('path');
+const vm = require('vm');
+const Iroh = require('./node_modules/iroh');
+
 
 console.log('Iroh is starting the analysis...');
 
