@@ -51,6 +51,9 @@ jobs:
       - name: Install Prettier
         run: npm install --save-dev --save-exact prettier
 
+      - name: Install Eslint + Prettier Config
+        run: npm install --save-dev eslint-config-prettier
+
       - name: Setup for Redis
         env:
           SETUP: >-
@@ -77,6 +80,12 @@ jobs:
         run: |
           node app --setup="${SETUP}" --ci="${CI}"
 
+      - name: Run Prettier Write
+        run: npx prettier . --write
+      
+      - name: Run Prettier Read
+        run: npx prettier . --check
+        
       - name: Run ESLint
         run: npm run lint
 
