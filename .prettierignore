@@ -1,3 +1,6 @@
+# Ignore all test files
+*.test.js
+
 # Ignore artifacts:
 build
 coverage
