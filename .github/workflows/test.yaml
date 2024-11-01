@@ -48,6 +48,9 @@ jobs:
         with:
           useLockFile: false
 
+      - name: Install Prettier
+        run: npm install --save-dev --save-exact prettier
+
       - name: Setup for Redis
         env:
           SETUP: >-
