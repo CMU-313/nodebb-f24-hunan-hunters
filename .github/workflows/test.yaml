@@ -85,9 +85,6 @@ jobs:
       
       - name: Run Prettier Check
         run: npx prettier . --check
-        
-      - name: Run ESLint
-        run: npm run lint
 
       - name: Node tests
         run: npm test
@@ -97,3 +94,6 @@ jobs:
 
       - name: Test coverage
         uses: coverallsapp/github-action@v2
+
+      - name: Run ESLint
+        run: npm run lint
