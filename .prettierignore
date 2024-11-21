@@ -1,0 +1,12 @@
+# Ignore everything in the build directory
+build/
+
+# Ignore everything in the install directory
+install/
+
+# Ignore everything in the test directory
+test/
+
+# Ignore artifacts:
+build
+coverage
