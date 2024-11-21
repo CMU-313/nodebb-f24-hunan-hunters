@@ -1,0 +1,28 @@
+
+> nodebb@3.8.4 analyze:custom
+> node analyze.js
+
+Iroh is starting the analysis...
+Entering function: main
+2024-10-25T00:49:26.907Z [4567/72724] - [32minfo[39m: NodeBB v3.8.4 Copyright (C) 2013-2024 NodeBB Inc.
+2024-10-25T00:49:26.907Z [4567/72724] - [32minfo[39m: This program comes with ABSOLUTELY NO WARRANTY.
+2024-10-25T00:49:26.907Z [4567/72724] - [32minfo[39m: This is free software, and you are welcome to redistribute it under certain conditions.
+2024-10-25T00:49:26.907Z [4567/72724] - [32minfo[39m: 
+2024-10-25T00:49:26.908Z [4567/72724] - [32minfo[39m: Initializing NodeBB v3.8.4 http://localhost:4567
+Iroh has finished the analysis.
+2024-10-25T00:49:27.554Z [4567/72724] - [32minfo[39m: [socket.io] Restricting access to origin: http://localhost:*
+2024-10-25T00:49:27.646Z [4567/72724] - [32minfo[39m: [api] Adding 0 route(s) to `api/v3/plugins`
+2024-10-25T00:49:27.648Z [4567/72724] - [32minfo[39m: [router] Routes added
+2024-10-25T00:49:27.652Z [4567/72724] - [32minfo[39m: 🎉 NodeBB Ready
+2024-10-25T00:49:27.652Z [4567/72724] - [32minfo[39m: 🤝 Enabling 'trust proxy'
+2024-10-25T00:49:27.655Z [4567/72724] - [32minfo[39m: 📡 NodeBB is now listening on: 0.0.0.0:4567
+2024-10-25T00:49:27.655Z [4567/72724] - [32minfo[39m: 🔗 Canonical URL: http://localhost:4567
+2024-10-25T00:49:38.116Z [4567/72724] - [32minfo[39m: [app] Shutdown (SIGTERM/SIGINT/SIGQUIT) Initialised.
+2024-10-25T00:49:38.117Z [4567/72724] - [32minfo[39m: [app] Web server closed to connections.
+2024-10-25T00:49:38.117Z [4567/72724] - [32minfo[39m: [app] Shutdown (SIGTERM/SIGINT/SIGQUIT) Initialised.
+2024-10-25T00:49:38.118Z [4567/72724] - [31merror[39m: Error [ERR_SERVER_NOT_RUNNING]: Server is not running.
+    at Server.close (node:net:2316:12)
+    at Object.onceWrapper (node:events:633:28)
+    at Server.emit (node:events:531:35)
+    at emitCloseNT (node:net:2376:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:89:21)
